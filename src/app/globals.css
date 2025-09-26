@@ -503,3 +503,31 @@ button {
     padding: 20px;
   }
 }
+
+
+@media (max-width: 1024px) {
+  .recipe-grid-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+
+@media (max-width: 600px) {
+  .recipe-grid-container {
+    grid-template-columns: 1fr;
+  }
+
+  .recipe-card {
+    font-size: 0.9rem;
+  }
+
+  .search-bar {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .search-bar input,
+  .search-bar select {
+    width: 100%;
+  }
+}
