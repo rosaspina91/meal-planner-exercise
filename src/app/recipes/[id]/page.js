@@ -65,8 +65,8 @@ export default function RecipeDetail({ params }) {
       <p>{meal.strInstructions}</p>
 
       <div className="actions">
-        <button onClick={addToFavorites}>Aggiungi ai Preferiti</button>
-        <button onClick={() => setPickerOpen(true)}>
+        <button className="btn-secondary" onClick={addToFavorites}>Aggiungi ai Preferiti</button>
+        <button className="btn-secondary" onClick={() => setPickerOpen(true)}>
           Aggiungi al Piano Settimanale
         </button>
       </div>
