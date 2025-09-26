@@ -14,6 +14,7 @@ const geistMono = Geist_Mono({
 export const metadata = {
   title: "Meal Planner",
   description: "App creata da Alexa Trapanese con Next.js",
+  viewport: "width=device-width, initial-scale=1.0"
 };
 
 export default function RootLayout({ children }) {
