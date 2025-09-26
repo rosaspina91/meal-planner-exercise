@@ -16,9 +16,6 @@ export default function DayMealPicker({ onSelect, onCancel }) {
 
   return (
     <div className="day-meal-picker">
-         <Link href="/" className="btn-secondary">
-      🏠 Torna alla Home
-    </Link>
       <div className="picker-row">
         <label>Giorno:</label>
         <select value={day} onChange={(e) => setDay(e.target.value)}>
