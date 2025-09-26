@@ -6,8 +6,11 @@ import useDebounce from "../hooks/useDebounce";
 export default function SearchBar({ categories = [], onSearch }) {
   const [term, setTerm] = useState("");
   const [category, setCategory] = useState("");
-  const debouncedTerm = useDebounce(term, 500);
 
+  // 🔹 Applico debounce SOLO al termine di ricerca
+  const debouncedTerm = useDebounce(term, 400);
+
+  // 🔹 Quando cambia term (debounced) o category → chiamo il parent
   useEffect(() => {
     onSearch({ term: debouncedTerm, category });
   }, [debouncedTerm, category]);
@@ -20,6 +23,7 @@ export default function SearchBar({ categories = [], onSearch }) {
         value={term}
         onChange={(e) => setTerm(e.target.value)}
       />
+
       <select
         value={category}
         onChange={(e) => setCategory(e.target.value)}

@@ -3,11 +3,9 @@
 import { useEffect, useState } from "react";
 import SearchBar from "./components/SearchBar";
 import RecipeGrid from "./components/RecipeGrid";
-import RecipeCard from "./components/RecipeCard";
-import FavoriteButton from "./components/FavoritesButton";
 import { searchMealsByName, getCategories } from "./lib/meals";
 import { getFavorites } from "./api/storage";
-import Link from "next/link"
+import Link from "next/link";
 
 export default function HomePage() {
   const [meals, setMeals] = useState([]);
@@ -40,16 +38,20 @@ export default function HomePage() {
         let results = await searchMealsByName(searchParams.term);
         results = results || [];
 
-        // filtra per categoria se selezionata
+        // filtra per categoria
         if (searchParams.category) {
-          results = results.filter(m => m.strCategory === searchParams.category);
+          results = results.filter(
+            (m) => m.strCategory === searchParams.category
+          );
         }
 
         // rimuove duplicati
-        const uniqueMeals = Array.from(new Map(results.map(m => [m.idMeal, m])).values());
+        const uniqueMeals = Array.from(
+          new Map(results.map((m) => [m.idMeal, m])).values()
+        );
 
         setMeals(uniqueMeals);
-        setCurrentPage(1); // reset pagina
+        setCurrentPage(1);
       } catch (err) {
         setError("Errore nel caricamento delle ricette");
       } finally {
@@ -66,20 +68,22 @@ export default function HomePage() {
   const currentMeals = meals.slice(indexOfFirstItem, indexOfLastItem);
   const totalPages = Math.ceil(meals.length / itemsPerPage);
 
-  const nextPage = () => setCurrentPage(prev => Math.min(prev + 1, totalPages));
-  const prevPage = () => setCurrentPage(prev => Math.max(prev - 1, 1));
+  const nextPage = () =>
+    setCurrentPage((prev) => Math.min(prev + 1, totalPages));
+  const prevPage = () => setCurrentPage((prev) => Math.max(prev - 1, 1));
 
   return (
     <div className="home-page">
       <h1>Ricettario - by Alexa</h1>
-      <div className="divider">
+
+      <div className="divider flex gap-4 mb-4">
         <Link href="/favorites" className="btn-secondary">
-        ❤️ Mostra i miei preferiti
-      </Link>
+          ❤️ Mostra i miei preferiti
+        </Link>
 
         <Link href="/plan" className="btn-secondary">
-        ❤️ Mostra il mio Piano
-      </Link>
+          📅 Mostra il mio Piano
+        </Link>
       </div>
 
       <SearchBar
@@ -105,7 +109,9 @@ export default function HomePage() {
               >
                 Prev
               </button>
-              <span>{currentPage} / {totalPages}</span>
+              <span>
+                {currentPage} / {totalPages}
+              </span>
               <button
                 onClick={nextPage}
                 disabled={currentPage === totalPages}
